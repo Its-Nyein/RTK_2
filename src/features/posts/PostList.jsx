@@ -4,6 +4,7 @@ import PostAuthor from "./PostAuthor";
 
 import React from "react";
 import TimeAgo from "./TimeAgo";
+import ReactionsButton from "./ReactionsButton";
 
 const postList = () => {
   const posts = useSelector(selectAllPosts);
@@ -20,6 +21,7 @@ const postList = () => {
         <PostAuthor userId={post.userId} />
         <TimeAgo timestamp={post.date} />
       </p>
+      <ReactionsButton post={post} />
     </article>
   ));
   return (
