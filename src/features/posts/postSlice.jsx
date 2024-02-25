@@ -12,12 +12,8 @@ const initialState = {
 };
 
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
-  try {
-    const response = await axios.get(POSTS_URL);
-    return [response.data];
-  } catch (err) {
-    console.log(err);
-  }
+  const response = await axios.get(POSTS_URL);
+  return response.data;
 });
 
 const postSlice = createSlice({
@@ -63,6 +59,7 @@ const postSlice = createSlice({
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.status = "succeeded";
         // adding date and reacions
+        let min = 1;
         const loadedPosts = action.payload.map((post) => {
           post.date = sub(new Date(), { minutes: min++ }).toISOString();
           post.reactions = {
@@ -74,6 +71,12 @@ const postSlice = createSlice({
           };
           return post;
         });
+        // Add any fetched posts to the array
+        state.posts = state.posts.concat(loadedPosts);
+      })
+      .addCase(fetchPosts.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
   },
 });
