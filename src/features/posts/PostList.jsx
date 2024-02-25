@@ -1,13 +1,27 @@
-import { useSelector } from "react-redux";
-import { selectAllPosts } from "./postSlice";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectAllPosts,
+  getPostsStatus,
+  getPostsError,
+  fetchPosts,
+} from "./postSlice";
 import PostAuthor from "./PostAuthor";
-
-import React from "react";
+import React, { useEffect } from "react";
 import TimeAgo from "./TimeAgo";
 import ReactionsButton from "./ReactionsButton";
 
 const postList = () => {
+  const dispatch = useDispatch();
+
   const posts = useSelector(selectAllPosts);
+  const postsStatus = useSelector(getPostsStatus);
+  const postsError = useSelector(getPostsError);
+
+  useEffect(() => {
+    if (postsStatus === "idle") {
+      dispatch(fetchPosts);
+    }
+  }, [postsStatus, dispatch]);
 
   const orderedPosts = posts
     .slice()
