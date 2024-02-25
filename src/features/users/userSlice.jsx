@@ -17,6 +17,8 @@ const userSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(fetchUsers.fulfilled, (state, action) => {
       return action.payload;
+      // we could have used state.push by spreading the action payload
+      // returning the full action payload that means it replaces user state
     });
   },
 });
