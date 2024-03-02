@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // nanoid generate random id so we don't need
 // to import something else like uuid
-import { postAdded } from "./postSlice";
+import { addNewPosts } from "./postSlice";
 import { selectAllUsers } from "../users/userSlice";
 
 function AddPostForm() {
@@ -11,16 +11,27 @@ function AddPostForm() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [userId, setUserId] = useState("");
+  const [addRequestStatus, setAddRequestStatus] = useState("idle");
+
+  const canSave =
+    [title, content, userId].every(Boolean) && addRequestStatus === "idle";
 
   const handleOnSavePost = () => {
-    if (title && content) {
-      dispatch(postAdded(title, content, userId));
-      setTitle("");
-      setContent("");
+    if (canSave) {
+      try {
+        setAddRequestStatus("pending");
+        dispatch(addNewPosts({ title, body: content, userId })).unwrap();
+
+        setTitle("");
+        setContent("");
+        setUserId("");
+      } catch (error) {
+        console.log("Fail to save post", error);
+      } finally {
+        setAddRequestStatus("idle");
+      }
     }
   };
-
-  const canSave = Boolean(title) && Boolean(content) && Boolean(userId);
 
   const users = useSelector(selectAllUsers);
   const userOptions = users.map((user) => (
