@@ -20,7 +20,7 @@ function SinglePostPage() {
   return (
     <article>
       <h2>{post.title}</h2>
-      <p>{post.content}</p>
+      <p>{post.body}</p>
       <p className="postCredit">
         <PostAuthor userId={post.userId} />
         <TimeAgo timestamp={post.date} />
