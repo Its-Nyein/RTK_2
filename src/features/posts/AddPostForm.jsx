@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 // to import something else like uuid
 import { addNewPosts } from "./postSlice";
 import { selectAllUsers } from "../users/userSlice";
+import { useNavigate } from "react-router-dom";
 
 function AddPostForm() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -25,6 +27,7 @@ function AddPostForm() {
         setTitle("");
         setContent("");
         setUserId("");
+        navigate("/");
       } catch (error) {
         console.log("Fail to save post", error);
       } finally {
