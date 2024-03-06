@@ -60,7 +60,7 @@ function AddPostForm() {
         <select
           id="postAuthor"
           value={userId}
-          onChange={(e) => setUserId(e.target.value)}
+          onChange={(e) => setUserId(Number(e.target.value))}
         >
           <option value=""></option>
           {userOptions}
