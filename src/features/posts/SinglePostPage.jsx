@@ -20,12 +20,12 @@ function SinglePostPage() {
   }
   return (
     <article>
-      <h2>{post.title}</h2>
-      <p>{post.body}</p>
+      <h2>{post?.title}</h2>
+      <p>{post?.body}</p>
       <p className="postCredit">
-        <Link to={`/post/edit/${post.id}`}>Edit Post</Link>
-        <PostAuthor userId={post.userId} />
-        <TimeAgo timestamp={post.date} />
+        <Link to={`/post/edit/${post?.id}`}>Edit Post</Link>
+        <PostAuthor userId={post?.userId} />
+        <TimeAgo timestamp={post?.date} />
       </p>
       <ReactionsButton post={post} />
     </article>

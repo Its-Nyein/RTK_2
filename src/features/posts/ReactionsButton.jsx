@@ -25,7 +25,7 @@ function ReactionsButton({ post }) {
             dispatch(reactionsAdded({ postId: post.id, reaction: name }))
           }
         >
-          {emoji} {post.reactions[name]}
+          {emoji} {post?.reactions[name]}
         </button>
       );
     }
