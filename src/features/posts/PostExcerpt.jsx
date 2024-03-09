@@ -19,4 +19,6 @@ function PostExcerpt({ post }) {
   );
 }
 
+PostExcerpt = React.memo(PostExcerpt);
+
 export default PostExcerpt;
