@@ -1,19 +1,20 @@
 import { useSelector } from "react-redux";
 import {
   selectPostIds,
-  getPostsStatus,
-  getPostsError,
+  // getPostsStatus,
+  // getPostsError,
   // fetchPosts,
 } from "./postSlice";
 // import React, { useEffect } from "react";
 import PostExcerpt from "./PostExcerpt";
+import { useGetPostsQuery } from "./postSlice";
 
 const postList = () => {
+  const { isLoading, isSuccess, isError, error } = useGetPostsQuery();
   // const dispatch = useDispatch();
 
   const orderedPostIds = useSelector(selectPostIds);
-  const postsStatus = useSelector(getPostsStatus);
-  const postsError = useSelector(getPostsError);
+  // const postsStatus = useSelector(getPostsStatus);
 
   // useEffect(() => {
   //   if (postsStatus === "idle") {
@@ -22,14 +23,14 @@ const postList = () => {
   // }, [postsStatus, dispatch]);
 
   let content;
-  if (postsStatus === "loading") {
+  if (isLoading) {
     content = <p>"Loading..."</p>;
-  } else if (postsStatus === "succeeded") {
+  } else if (isSuccess) {
     content = orderedPostIds.map((postId) => (
       <PostExcerpt key={postId} postId={postId} />
     ));
-  } else if (postsStatus === "failed") {
-    content = <p>{postsError}</p>;
+  } else if (isError) {
+    content = <p>{error}</p>;
   }
 
   return <section>{content}</section>;
