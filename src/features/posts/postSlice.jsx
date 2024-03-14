@@ -57,6 +57,25 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         ...result.ids.map((id) => ({ type: "Post", id })),
       ],
     }),
+    addNewPost: builder.mutation({
+      query: (initialPost) => ({
+        url: "/posts",
+        method: "POST",
+        body: {
+          ...initialPost,
+          userId: Number(initialPost.userId),
+          date: new Date().toISOString(),
+          reactions: {
+            thumbsUp: 0,
+            wow: 0,
+            heart: 0,
+            rocket: 0,
+            coffee: 0,
+          },
+        },
+      }),
+      invalidatesTags: [{ type: "Post", id: "LIST" }],
+    }),
   }),
 });
 
