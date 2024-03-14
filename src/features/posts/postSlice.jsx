@@ -87,6 +87,14 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, arg) => [{ type: "Post", id: arg.id }],
     }),
+    deletePost: builder.mutation({
+      query: ({ id }) => ({
+        url: `/posts/${id}`,
+        method: "DELETE",
+        body: { id },
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: "Post", id: arg.id }],
+    }),
   }),
 });
 
