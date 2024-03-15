@@ -20,7 +20,7 @@ const UserPage = () => {
     isSuccess,
     isError,
     error,
-  } = useGetPostsByUserIdQuery();
+  } = useGetPostsByUserIdQuery(userId);
 
   // const postsTitle = postsForUser.map((post) => (
   //   <li key={post.id}>

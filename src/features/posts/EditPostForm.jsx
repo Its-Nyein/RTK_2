@@ -3,7 +3,7 @@ import {
   // useDispatch,
   useSelector,
 } from "react-redux";
-import { selectPostById, updatePost, deletePost } from "./postSlice";
+import { selectPostById } from "./postSlice";
 import { useParams, useNavigate } from "react-router-dom";
 
 import { selectAllUsers } from "../users/userSlice";

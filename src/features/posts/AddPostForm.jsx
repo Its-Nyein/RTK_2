@@ -5,7 +5,7 @@ import {
 } from "react-redux";
 // nanoid generate random id so we don't need
 // to import something else like uuid
-import { addNewPosts } from "./postSlice";
+// import { addNewPosts } from "./postSlice";
 import { selectAllUsers } from "../users/userSlice";
 import { useNavigate } from "react-router-dom";
 import { useAddNewPostMutation } from "./postSlice";

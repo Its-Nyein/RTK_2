@@ -1,8 +1,8 @@
-import { CreateApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const apiSlice = CreateApi({
+export const apiSlice = createApi({
   reducerPatch: "api",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000" }),
-  tagTypes: ["Post"],
+  tagTypes: ["Post", "User"],
   endpoints: (builder) => ({}),
 });
